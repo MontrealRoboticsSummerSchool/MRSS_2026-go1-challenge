@@ -15,7 +15,6 @@ resume: false  # Whether to resume from a checkpoint.
 #checkpoint: CHECKPOINT  # Checkpoint file to resume from.
 logger: wandb  # Logger module to use. {neptune, wandb, tensorboard}
 log_project_name: MRSS25  # Name of the logging project when using wandb or neptune.
-
 env:
   scene:
     num_envs: 1  # Number of environments to generate terrain for and run in parallel.
@@ -98,7 +97,7 @@ env:
         force_range: [ 0.0, 0.0 ]  # Range for randomizing the external force applied to the base
         torque_range: [ 0.0, 0.0 ]  # Range for randomizing the external torque applied to the base
 
-    push_robot: 'null'  # Event to push the robot, set to None to disable
+    push_robot: null  # Event to push the robot, set to None to disable
 
 
 algorithm:

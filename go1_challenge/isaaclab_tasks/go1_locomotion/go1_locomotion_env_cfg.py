@@ -28,7 +28,7 @@ from isaaclab.terrains import TerrainImporterCfg, TerrainGeneratorCfg
 from isaaclab.utils import configclass
 
 from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAACLAB_NUCLEUS_DIR
-from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+from isaaclab.utils.noise import UniformNoiseCfg as Unoise
 
 import isaaclab_tasks.manager_based.locomotion.velocity.mdp as mdp
 
@@ -408,7 +408,6 @@ class Go1LocomotionEnvCfg(ManagerBasedRLEnvCfg):
         self.sim.dt = 0.005
         self.sim.render_interval = self.decimation
         self.sim.physics_material = self.scene.terrain.physics_material
-        self.sim.physx.gpu_max_rigid_patch_count = 10 * 2**15
 
         # --- update sensor update periods
         # we tick all the sensors based on the smallest update period (physics update period)

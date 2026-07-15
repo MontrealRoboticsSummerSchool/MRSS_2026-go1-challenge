@@ -8,7 +8,8 @@
 """Launch Isaac Sim Simulator first."""
 
 import argparse
-
+import importlib.metadata as metadata
+from packaging import version
 from isaaclab.app import AppLauncher
 
 # local imports
@@ -55,9 +56,9 @@ from rsl_rl.runners import OnPolicyRunner
 from isaaclab.envs import DirectMARLEnv, multi_agent_to_single_agent
 from isaaclab.utils.assets import retrieve_file_path
 from isaaclab.utils.dict import print_dict
-from isaaclab.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
+from isaaclab_rl.utils.pretrained_checkpoint import get_published_pretrained_checkpoint
 
-from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper, export_policy_as_jit
+from isaaclab_rl.rsl_rl import RslRlOnPolicyRunnerCfg, RslRlVecEnvWrapper, export_policy_as_jit, handle_deprecated_rsl_rl_cfg
 from isaaclab_tasks.utils import get_checkpoint_path, parse_env_cfg
 
 # import gym envs
@@ -65,6 +66,23 @@ import isaaclab_tasks  # noqa: F401
 import go1_challenge.isaaclab_tasks  # noqa: F401
 
 # PLACEHOLDER: Extension template (do not remove this comment)
+
+RSL_RL_VERSION = "3.0.1"
+try:
+    installed_version = metadata.version("rsl-rl-lib")
+    if version.parse(installed_version) < version.parse(RSL_RL_VERSION):
+        if platform.system() == "Windows":
+            cmd = [r".\isaaclab.bat", "-p", "-m", "pip", "install", f"rsl-rl-lib=={RSL_RL_VERSION}"]
+        else:
+            cmd = ["./isaaclab.sh", "-p", "-m", "pip", "install", f"rsl-rl-lib=={RSL_RL_VERSION}"]
+        print(
+            f"Please install the correct version of RSL-RL.\nExisting version is: '{installed_version}'"
+            f" and required version is: '{RSL_RL_VERSION}'.\nTo install the correct version, run:"
+            f"\n\n\t{' '.join(cmd)}\n"
+        )
+        exit(1)
+except metadata.PackageNotFoundError:
+    installed_version = RSL_RL_VERSION
 
 
 def main():
@@ -74,7 +92,7 @@ def main():
         args_cli.task, device=args_cli.device, num_envs=args_cli.num_envs, use_fabric=not args_cli.disable_fabric
     )
     agent_cfg: RslRlOnPolicyRunnerCfg = rsl_cli_args.parse_rsl_rl_cfg(args_cli.task, args_cli)
-
+    agent_cfg = handle_deprecated_rsl_rl_cfg(agent_cfg, installed_version)
     # specify directory for logging experiments
     log_root_path = os.path.join("logs", "rsl_rl", agent_cfg.experiment_name)
     log_root_path = os.path.abspath(log_root_path)
@@ -120,20 +138,19 @@ def main():
 
     # obtain the trained policy for inference
     policy = ppo_runner.get_inference_policy(device=env.unwrapped.device)
-
+    export_model_dir = os.path.join(os.path.dirname(resume_path), "exported")
     # extract the neural network module
     # we do this in a try-except to maintain backwards compatibility.
-    try:
-        # version 2.3 onwards
-        policy_nn = ppo_runner.alg.policy
-    except AttributeError:
-        # version 2.2 and below
-        policy_nn = ppo_runner.alg.actor_critic
-
-    # export policy to jit
-    if args_cli.jit_compile:
-        export_model_dir = os.path.join(os.path.dirname(resume_path), "exported")
-        export_policy_as_jit(policy_nn, ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.pt")
+    if version.parse(installed_version) >= version.parse("4.0.0"):
+        # use the new export functions for rsl-rl >= 4.0.0
+        ppo_runner.export_policy_to_jit(path=export_model_dir, filename="policy.pt")
+        ppo_runner.export_policy_to_onnx(path=export_model_dir, filename="policy.onnx")
+    else:
+        # extract the neural network for rsl-rl < 4.0.0
+        if version.parse(installed_version) >= version.parse("2.3.0"):
+            policy_nn = ppo_runner.alg.policy
+        else:
+            policy_nn = ppo_runner.alg.actor_critic
 
     dt = env.unwrapped.step_dt
 
@@ -143,7 +160,7 @@ def main():
     done_list = []
 
     # reset environment
-    obs, _ = env.get_observations()
+    obs = env.get_observations()
     timestep = 0
     # simulate environment
     while simulation_app.is_running() and (not args_cli.record_data or len(obs_list) < args_cli.data_length):

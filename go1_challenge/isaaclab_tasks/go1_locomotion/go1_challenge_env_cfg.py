@@ -25,7 +25,7 @@ import isaaclab.terrains as terrain_gen
 
 from isaaclab.utils import configclass
 from isaaclab.utils.assets import ISAACLAB_NUCLEUS_DIR, check_file_path, read_file
-from isaaclab.utils.noise import AdditiveUniformNoiseCfg as Unoise
+from isaaclab.utils.noise import UniformNoiseCfg as Unoise
 
 from isaaclab.sensors import CameraCfg
 from isaaclab.sensors import ContactSensorCfg, RayCasterCfg, patterns
@@ -35,7 +35,7 @@ from isaaclab.devices import Se2Keyboard
 from pxr import UsdGeom, Gf, UsdPhysics, Sdf
 import omni.usd
 
-from isaacsim.core.prims import XFormPrim
+from isaacsim.core.experimental.prims import XformPrim
 
 ##
 # Pre-defined configs
@@ -396,7 +396,7 @@ def randomize_obstacle_positions(
         z = 0.0  # Height for all obstacles
 
         # Get asset from scene
-        asset: XFormPrim = env.scene[asset_cfg.name]
+        asset: XformPrim = env.scene[asset_cfg.name]
         prim_paths = asset.prim_paths
 
         for _, env_id in enumerate(env_ids):

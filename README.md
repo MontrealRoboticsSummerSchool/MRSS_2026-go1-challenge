@@ -214,7 +214,7 @@ Checkpoints will be saved under `logs/rsl_rl/<run_name>/<timestamp>`.
 To test the trained policy, run the following command:
 
 ```bash
-python scripts/01-play.py --load_run=RUN_NAME
+python scripts/02-play.py --load_run=RUN_NAME
 ```
 
 Available arguments:

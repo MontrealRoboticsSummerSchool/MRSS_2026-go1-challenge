@@ -71,7 +71,7 @@ import os
 from isaaclab.envs import ManagerBasedRLEnv
 from isaaclab.managers import ObservationTermCfg as ObsTerm
 from isaaclab.utils.assets import read_file
-from isaacsim.core.utils.viewports import set_camera_view
+from isaaclab.sim import SimulationContext
 from isaaclab.devices import Se2Keyboard, Se2KeyboardCfg
 
 from go1_challenge.navigation import NavController
@@ -106,7 +106,7 @@ def load_policy_rsl(policy_file: str):
 
     file_bytes = read_file(policy_path)
     try:
-        policy = torch.jit.load(file_bytes)
+        policy = torch.jit.load(policy_path)
 
     except RuntimeError as e:
         raise RuntimeError(f"Failed to load policy from {policy_path}: {e}. Did you properly export the policy?")
@@ -243,8 +243,8 @@ def main():
     policy_file = args_cli.policy
     policy = load_policy_rsl(policy_file)
     policy = policy.to(env.device).eval()
-
-    set_camera_view(eye=[3.5, 3.5, 3.5], target=[0.0, 0.0, 0.0])
+    sim_con = SimulationContext()
+    sim_con.set_camera_view(eye=[3.5, 3.5, 3.5], target=[0.0, 0.0, 0.0])
 
     # --- Reset environment
     if teleop_interface is not None:
