@@ -53,7 +53,7 @@ If you encounter any installation problems, please post your questions in the Di
    ./isaacsim/isaac-sim.sh
    ```
 
-### 2. Isaac Lab
+### 2. Isaac Lab 2.0.0
 
 **Isaac Lab** is a modular robot learning framework built on Isaac Sim. It's used to create RL environments and control the simulation.
 
@@ -214,7 +214,7 @@ Checkpoints will be saved under `logs/rsl_rl/<run_name>/<timestamp>`.
 To test the trained policy, run the following command:
 
 ```bash
-python scripts/01-play.py --load_run=RUN_NAME
+python scripts/02-play.py --load_run=RUN_NAME
 ```
 
 Available arguments:

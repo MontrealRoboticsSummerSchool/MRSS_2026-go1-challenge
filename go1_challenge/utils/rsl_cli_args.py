@@ -86,7 +86,8 @@ def update_rsl_rl_cfg(agent_cfg: RslRlOnPolicyRunnerCfg, args_cli: argparse.Name
             if hasattr(agent_cfg.algorithm, k):
                 setattr(agent_cfg.algorithm, k, v)
             else:
-                raise ValueError(f"Unknown algorithm parameter: {k}")
+                pass
+                #raise ValueError(f"Unknown algorithm parameter: {k}")
     if hasattr(args_cli, "max_iterations") and args_cli.max_iterations is not None:
         agent_cfg.max_iterations = args_cli.max_iterations
     return agent_cfg
