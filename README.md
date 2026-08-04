@@ -1,4 +1,4 @@
-# Montreal Summer School 2025 - Go1 Locomotion Challenge
+# Montreal Summer School 2026 - Go1 Locomotion Challenge
 
 This repository contains code for the Go1 Locomotion Challenge, which involves training a Go1 robot to walk using reinforcement learning (RL). We will use:
 - **Isaac Sim** [(https://github.com/isaac-sim/IsaacSim/)](https://github.com/isaac-sim/IsaacSim/) for simulation
@@ -25,7 +25,7 @@ The main requirement is being able to run Isaac Sim and Isaac Lab. If you can su
 
 **Recommended Operating System:** Ubuntu 22.04 LTS (this is what was used for testing and development)
 
-Your system must meet Isaac Sim's [minimum hardware requirements](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/requirements.html#system-requirements), which include:
+Your system must meet Isaac Sim's [minimum hardware requirements](https://docs.isaacsim.omniverse.nvidia.com/6.0.1/installation/requirements.html), which include:
 - NVIDIA RTX GPU (required for physics simulation)
 - Sufficient RAM and storage
 - Compatible NVIDIA drivers
@@ -39,14 +39,14 @@ If you are not able to install the project on your own machine, MILA will provid
 
 If you encounter any installation problems, please post your questions in the Discord channel.
 
-### 1. Isaac Sim 4.5.0
+### 1. Isaac Sim 6.0.1
 
-**Isaac Sim 4.5.0** simulates the Go1 robot and environment physics.
+**Isaac Sim 6.0.1** simulates the Go1 robot and environment physics.
 
-1. Ensure your PC meets the [minimum system requirements](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/requirements.html#system-requirements).
+1. Ensure your PC meets the [minimum system requirements](https://docs.isaacsim.omniverse.nvidia.com/6.0.1/installation/requirements.html).
 
 2. Follow the Isaac Sim Documentation to install the **Workstation Setup**: 
-   [Workstation Installation](https://docs.isaacsim.omniverse.nvidia.com/4.5.0/installation/install_workstation.html#workstation-setup).
+   [Workstation Installation](https://docs.isaacsim.omniverse.nvidia.com/6.0.1/installation/install_workstation.html).
 
 3. Test that the application starts:
    ```bash
@@ -57,7 +57,7 @@ If you encounter any installation problems, please post your questions in the Di
 
 **Isaac Lab** is a modular robot learning framework built on Isaac Sim. It's used to create RL environments and control the simulation.
 
-1. Follow the instructions to install Isaac Lab from binaries: [Isaac Lab Binaries Installation](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html).
+1. Follow the instructions to install Isaac Lab with Isaac sim pre-built binaries: [Isaac Lab Binaries Installation](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html).
 
 > [!WARNING] 
 > Make sure you set up the Conda environment ([Setting up the conda environment](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html#setting-up-the-conda-environment-optional)). A virtual environment is required to install the other projects.
@@ -97,7 +97,7 @@ Install the Go1 Challenge repository:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/csirois14/MRSS2025-go1-challenge.git
+   git clone https://github.com/MontrealRoboticsSummerSchool/MRSS_2026-go1-challenge.git
    ```
 
 2. Install as a Python package:
@@ -105,7 +105,7 @@ Install the Go1 Challenge repository:
    # Activate your conda environment created for IsaacLab (if not already activated)
    conda activate isaaclab
 
-   cd MRSS2025-go1-challenge
+   cd MRSS2026-go1-challenge
 
    # Install the package
    pip install -e .
@@ -220,7 +220,7 @@ python scripts/02-play.py --load_run=RUN_NAME
 Available arguments:
 - `--load_run`: Specifies the run to load (folder name where the trained policy is saved)
 - `--num_envs`: Number of environments to run in parallel
-- `--headless`: Runs the simulation without a GUI
+- `--visualizer kit`: Runs the simulation with the GUI, the default behaviour is headless
 
 You have two options to load checkpoints:
 - `--load_run 2025-08-05_15-16-27`: Runs the latest policy from that run
@@ -245,7 +245,7 @@ You can test your policy's performance in simulation by changing the terrain lev
 
 You can also test your policy in the arena with:
 ```bash
-python scripts/03-go1_arena.py --teleop --level 1 --policy logs/rsl_rl/go1_locomotion/2025-08-05_15-16-27_go1_locomotion/exported/policy.pt
+python scripts/03-go1_arena.py --teleop --level 1 --policy logs/rsl_rl/go1_locomotion/2025-08-05_15-16-27_go1_locomotion/exported/policy.pt --visualizer kit
 ```
 
 Robot controls:
@@ -261,15 +261,13 @@ There are three levels of increasing difficulty:
 
 The level can be specified via the `--level` arg.  
 
-
-
 ## Challenge 3 - Vision-Based Navigation
 
 Your doggo is now hungry and wants to reach its food bowl! Your final task is to implement a navigation controller that will guide the robot to its goal autonomously using vision-based localization.
 
 You can start the challenge with:
 ```bash
-python scripts/03-go1_arena.py --level 2 --policy logs/rsl_rl/go1_locomotion/2025-08-05_15-16-27_go1_locomotion/exported/policy.pt
+python scripts/03-go1_arena.py --level 2 --policy logs/rsl_rl/go1_locomotion/2025-08-05_15-16-27_go1_locomotion/exported/policy.pt --visualizer kit
 ```
 (same as before, but without the `--teleop` flag).
 
@@ -288,7 +286,7 @@ The navigation system is implemented in [`go1_challenge/navigation/nav_controlle
 
 #### Key Functions to Implement
 
-You need to implement the following core methods marked with `@MRSS25`:
+You need to implement the following core methods marked with `@MRSS26`:
 
 ##### 1. `update(self, observations: dict) -> None`
 **Purpose**: Update the robot's internal state based on sensor observations.
@@ -380,7 +378,7 @@ Your navigation controller will be evaluated on:
 - **Efficiency**: How quickly does it reach the goal?
 - **Robustness**: Does it handle obstacles and localization failures gracefully?
 
-Important comments in the code are tagged with `@MRSS25` to help you identify what needs to be implemented.
+Important comments in the code are tagged with `@MRSS26` to help you identify what needs to be implemented.
 
 Good luck with your autonomous navigation system!
 
