@@ -2,7 +2,7 @@
 Navigation Controller base class for Go1 Challenge.
 
 This class handles robot localization and navigation command generation.
-@MRSS25: You have to implement the core methods to complete the navigation system.
+@MRSS26: You have to implement the core methods to complete the navigation system.
 """
 
 import numpy as np
@@ -76,14 +76,14 @@ class NavController:
         self.landmark_map = {}  # Dict to store landmark positions
         self.last_update_time = 0.0
 
-        # @MRSS25: You can add more state variables as needed for your navigation logic
+        # @MRSS26: You can add more state variables as needed for your navigation logic
         pass
 
     def detect_apriltags(self, rgb_image: torch.Tensor, visualize: bool = False) -> dict[int, dict]:
         """
         Detect AprilTags in RGB image and estimate their poses.
 
-        @MRSS25: You can override this method to implement your own detection logic
+        @MRSS26: You can override this method to implement your own detection logic
         or use the raw images for other processing.
 
         Args:
@@ -214,7 +214,7 @@ class NavController:
 
         This method is called from the main loop (sim or real) when new information is available.
 
-        @MRSS25: It's here where you should implement localization and planning logic here.
+        @MRSS26: It's here where you should implement localization and planning logic here.
 
         For the sim environemnt, frame HxW is 480x640
 
@@ -266,7 +266,7 @@ class NavController:
                 print(f"\t-{tag_id}: Position {tag_info['pose']['position']}, Distance {tag_info['distance']:.2f}m")
 
         # 2. Localization and planning logic
-        # TODO @MRSS25: Implement localization logic here
+        # TODO @MRSS26: Implement localization logic here
         self.robot_pose = ...
 
         pass
@@ -275,7 +275,7 @@ class NavController:
         """
         Generate velocity command based on current navigation state.
 
-        @MRSS25: You should implement navigation/path planning logic here. Ideas of observations you could use:
+        @MRSS26: You should implement navigation/path planning logic here. Ideas of observations you could use:
         - Current robot pose estimate (self.robot_pose)
         - Goal position (from latest observations)
         - Detected AprilTags for localization
@@ -290,7 +290,7 @@ class NavController:
         lin_vel_y = 0.0  # No lateral motion
         ang_vel_z = 0.0  # No rotation
 
-        # TODO MRSS25: Implement navigation logic
+        # TODO MRSS26: Implement navigation logic
 
         # Ensure commands are in valid range
         lin_vel_x = np.clip(lin_vel_x, -1.0, 1.0)
@@ -312,7 +312,7 @@ class NavController:
         self.pose_covariance = np.eye(3) * 0.1
         self.landmark_map.clear()
 
-        # TODO @MRSS25: Implement reset logic
+        # TODO @MRSS26: Implement reset logic
 
         pass
 
