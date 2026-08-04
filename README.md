@@ -105,7 +105,7 @@ Install the Go1 Challenge repository:
    # Activate your conda environment created for IsaacLab (if not already activated)
    conda activate isaaclab
 
-   cd MRSS2026-go1-challenge
+   cd MRSS_2026-go1-challenge
 
    # Install the package
    pip install -e .
