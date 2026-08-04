@@ -5,11 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "go1_challenge"
 version = "0.1.0"
-description = "Go1 Challenge for MRSS 2025"
+description = "Go1 Challenge for MRSS 2026"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "BSD-3-Clause" }
-authors = [{ name = "MRSS 2025 Team" }]
+authors = [{ name = "MRSS 2026 Team" }]
 
 classifiers = ["Programming Language :: Python :: 3.10"]
 dependencies = [
@@ -27,10 +27,10 @@ dependencies = [
 dev = ["pytest", "black", "flake8", "mypy", "pillow", "cairosvg"]
 
 # [project.urls]
-# Homepage = "https://github.com/your-org/MRSS2025"
-# Repository = "https://github.com/your-org/MRSS2025"
-# Documentation = "https://github.com/your-org/MRSS2025"
-# "Bug Tracker" = "https://github.com/your-org/MRSS2025/issues"
+# Homepage = "https://github.com/your-org/MRSS2026"
+# Repository = "https://github.com/your-org/MRSS2026"
+# Documentation = "https://github.com/your-org/MRSS2026"
+# "Bug Tracker" = "https://github.com/your-org/MRSS2026/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
