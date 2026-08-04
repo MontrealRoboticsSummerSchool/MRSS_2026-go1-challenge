@@ -14,7 +14,7 @@ resume: false  # Whether to resume from a checkpoint.
 #load_run: LOAD_RUN   # Name of the run folder to resume from.
 #checkpoint: CHECKPOINT  # Checkpoint file to resume from.
 logger: wandb  # Logger module to use. {neptune, wandb, tensorboard}
-log_project_name: MRSS25  # Name of the logging project when using wandb or neptune.
+log_project_name: MRSS26  # Name of the logging project when using wandb or neptune.
 env:
   scene:
     num_envs: 1  # Number of environments to generate terrain for and run in parallel.
