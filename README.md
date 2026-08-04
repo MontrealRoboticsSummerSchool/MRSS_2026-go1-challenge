@@ -57,7 +57,7 @@ If you encounter any installation problems, please post your questions in the Di
 
 **Isaac Lab 2.2.0** is a modular robot learning framework built on Isaac Sim. It's used to create RL environments and control the simulation.
 
-1. Follow the instructions to install Isaac Lab with Isaac sim pre-built binaries: [Isaac Lab Binaries Installation](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html).
+1. Follow the instructions to install Isaac Lab with Isaac sim pre-built binaries: [Isaac Lab Binaries Installation](https://isaac-sim.github.io/IsaacLab/v2.2.0/source/setup/installation/binaries_installation.html).
 
 > [!WARNING] 
 > Make sure you set up the Conda environment ([Setting up the conda environment](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html#setting-up-the-conda-environment-optional)). A virtual environment is required to install the other projects.
