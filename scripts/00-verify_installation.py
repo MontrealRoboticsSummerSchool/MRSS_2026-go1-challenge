@@ -58,7 +58,6 @@ def check_required_packages():
         ("pyapriltags", "PyAprilTags"),
         ("isaaclab", "Isaac Lab"),
         ("omni", "Omniverse"),
-        ("carb", "Carbonite"),
         ("isaaclab.app", "Isaac Lab App"),
         ("rsl_rl", "RSL-RL"),
         ("go1_challenge", "Go1 Challenge"),

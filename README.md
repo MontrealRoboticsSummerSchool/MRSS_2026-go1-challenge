@@ -53,9 +53,9 @@ If you encounter any installation problems, please post your questions in the Di
    ./isaacsim/isaac-sim.sh
    ```
 
-### 2. Isaac Lab 2.0.0
+### 2. Isaac Lab 2.2.0
 
-**Isaac Lab** is a modular robot learning framework built on Isaac Sim. It's used to create RL environments and control the simulation.
+**Isaac Lab 2.2.0** is a modular robot learning framework built on Isaac Sim. It's used to create RL environments and control the simulation.
 
 1. Follow the instructions to install Isaac Lab from binaries: [Isaac Lab Binaries Installation](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/binaries_installation.html).
 
@@ -178,6 +178,7 @@ python scripts/01-train.py --config=config/training_params.yaml
 ```
 
 The `--config` flag specifies the configuration file for training parameters. See the `config` folder for more details.
+To view the simulation in isaacsim, edit training_params.yaml and set 'headless' to false.
 
 During training, you can monitor progress in the WandB dashboard. Make sure you have WandB installed and configured:
 
@@ -261,7 +262,11 @@ There are three levels of increasing difficulty:
 
 The level can be specified via the `--level` arg.  
 
+To suppress warning logging outputs, the logging level can be changed by running the script with:
 
+```
+--kit_args "--/log/level=error --/log/outputStreamLevel=error"
+```
 
 ## Challenge 3 - Vision-Based Navigation
 
